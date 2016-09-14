@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>{% trans 'Lessons Available' %}</h2>
+{% for teacher in teachers %}
+  <h2>{% trans 'Teacher' %}: {{ teacher.name }}</h2>
+  {% for lesson in teacher.lessons.all %}
+    {% include "_lesson_details.html" with lesson=lesson form=new_student_form %}
+  {% endfor %}
+{% endfor %}
+{% endblock content %}
