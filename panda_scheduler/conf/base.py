@@ -15,6 +15,7 @@ import os
 WSGI_APPLICATION = 'panda_scheduler.wsgi.application'
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__ + '/..')))
 PROJECT_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir)
+SECRET_KEY = '5eq6mxbe67+2+0x3tm2kt!!culsvzdxu39^06-#n9j*i9=9w6@'
 
 DEBUG = True
 
@@ -24,6 +25,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'base.apps.BaseConfig',
+    'lessons.apps.LessonsConfig',
+    'teachers.apps.TeachersConfig',
+    'students.apps.StudentsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -110,5 +115,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
+MEDIA_URL = '/media/'
+MEDIA_ROOT = 'media/'
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static/'
