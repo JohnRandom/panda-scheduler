@@ -20,7 +20,7 @@
           {% if lesson.cancelled %}<b>CANCELLED</b>{% endif %}
           {{ lesson.subject }}
           - {{ lesson.get_weekday_display }}
-            {% trans 'from' %}:{{ lesson.time_starting }}
+            {% trans 'from' %}: {{ lesson.time_starting }}
             {% trans 'until' %}: {{ lesson.time_ending }}
           - {% trans 'attendees' %}: {{ lesson.students.count }}/{{ lesson.max_attendance }}
         </li>
