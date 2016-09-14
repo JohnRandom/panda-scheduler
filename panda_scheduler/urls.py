@@ -17,7 +17,11 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 
+from base import views as base_views
+
+
 urlpatterns = [
+    url(r'^$', base_views.index, name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^teachers/', include('teachers.urls')),
     url(r'^lessons/', include('lessons.urls')),

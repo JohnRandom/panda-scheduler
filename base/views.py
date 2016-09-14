@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 
-# Create your views here.
+
+def index(request):
+    entry_point = reverse('lessons_index')
+
+    return HttpResponseRedirect(entry_point)
