@@ -1,12 +1,27 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+{% block css %}
+  {{ block.super }}
+  <style type="text/css">
+    .teacher-name {
+
+    }
+  </style>
+{% endblock css %}
+
 {% block content %}
-<h2>{% trans 'Lessons Available' %}</h2>
+<h1 class="page-header">{% trans 'Lessons' %}</h1>
+
 {% for teacher in teachers %}
-  <h2>{% trans 'Teacher' %}: {{ teacher.name }}</h2>
+
+{% if teacher.lessons.count %}
+  <h4 class="page-header">{{ teacher.name }}</h4>
   {% for lesson in teacher.lessons.all %}
     {% include "_lesson_details.html" with lesson=lesson form=new_student_form %}
   {% endfor %}
+{% endif %}
+
 {% endfor %}
+
 {% endblock content %}

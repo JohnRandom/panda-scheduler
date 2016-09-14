@@ -14,15 +14,35 @@
       </a>
     </h4>
   </div>
-  <div id="lesson-{{ lesson.id }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{ lesson.id }}">
+  <div id="lesson-{{ lesson.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{ lesson.id }}">
     <div class="panel-body">
+      {% if lesson.description %}
+      <h5>{% trans 'Description' %}</h5>
+      <p>{{ lesson.description }}</p>
+      {% else %}
+      <p><i>{% trans 'No Description...' %}</i></p>
+      {% endif %}
 
+      {% if lesson.students.count %}
+      <h5>{% trans 'Attendees' %}</h5>
+      <ul>
+        {% for student in lesson.students.all %}
+          {% include "_lesson_attendee.html" with attendee=student %}
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p><i>{% trans 'Be the first to sign up...' %}</i></p>
+      {%  endif %}
+
+      {% include "_new_student_modal.html" with lesson=lesson form=form %}
+    </div>
+    <div class="panel-footer">
       {% if lesson.cancelled %}
       <button type="button" class="btn btn-secondary btn-lg">
         {% trans 'Cancelled' %}
       </button>
       {% else %}{% if lesson.seats_available %}
-      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#new-student-{{ lesson.id }}">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-student-{{ lesson.id }}">
         {% trans 'Attend Lesson' %}
       </button>
       {% else %}
@@ -30,22 +50,6 @@
         {% trans 'Lesson is full' %}
       </button>
       {% endif %}{% endif %}
-
-      {% if lesson.description %}
-      <h3>{% trans 'Description' %}</h3>
-      <p>{{ lesson.description }}</p>
-      {% endif %}
-
-      {% include "_new_student_modal.html" with lesson=lesson form=form %}
-
-      {% if lesson.students.count %}
-      <h3>{% trans 'Attendees' %}</h3>
-      <ul>
-        {% for student in lesson.students.all %}
-          {% include "_lesson_attendee.html" with attendee=student %}
-        {% endfor %}
-      </ul>
-      {%  endif %}
     </div>
   </div>
 </div>
