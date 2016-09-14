@@ -1,0 +1,25 @@
+{% load i18n %}
+
+<div class="modal fade" id="new-student-{{ lesson.id }}" tabindex="-1" role="dialog" aria-labelledby="newLessonModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="new-student-modal-{{ lesson.id }}">
+          {% trans 'Register Attendance' %}</h4>
+      </div>
+      <form method="post" action="{% url 'new_student' lesson_id=lesson.id %}">
+        <div class="modal-body">
+          {% csrf_token %}
+          {{ form.as_p }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            {% trans 'Close' %}
+          </button>
+          <input type="submit" class="btn btn-primary" name="{% trans 'Submit' %}" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
