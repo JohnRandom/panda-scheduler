@@ -3,5 +3,6 @@ from . import views
 
 
 urlpatterns = [
+    url(r'^$', views.index, name='lessons_index'),
     url(r'^new/(?P<teacher_id>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$', views.new_lesson, name='new_lesson'),
 ]

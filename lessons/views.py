@@ -3,8 +3,18 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 from .forms.new_lesson import NewLessonForm
-from teachers.models import Teacher
 from .models import Lesson
+from teachers.models import Teacher
+from students.forms.new_student import NewStudentForm
+
+
+def index(request):
+    teachers = Teacher.objects.all()
+
+    return render(request, 'lessons_index.html', context={
+        'teachers': teachers,
+        'new_student_form': NewStudentForm()
+    })
 
 
 def new_lesson(request, teacher_id):
@@ -22,6 +32,6 @@ def new_lesson(request, teacher_id):
             })
     else:
         form = NewLessonForm()
-        return render('new_lesson.html', context={
+        return render(request, 'new_lesson.html', context={
             'form': form
         })

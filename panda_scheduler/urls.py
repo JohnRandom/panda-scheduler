@@ -20,5 +20,6 @@ from django.conf import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^teachers/', include('teachers.urls')),
-    url(r'^lessons/', include('lessons.urls'))
+    url(r'^lessons/', include('lessons.urls')),
+    url(r'^students/', include('students.urls'))
 ]

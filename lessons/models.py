@@ -22,7 +22,7 @@ WEEKDAY_CHOICES = (
 
 class Lesson(UUIDModel):
 
-    objects = LessonsManager
+    objects = LessonsManager()
 
     time_starting = models.TimeField(_('time starting'), editable=True)
     time_ending = models.TimeField(_('time ending'), editable=True)
@@ -34,4 +34,6 @@ class Lesson(UUIDModel):
 
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='lessons')
     students = models.ManyToManyField(Student, related_name='students')
-    
+
+    def seats_available(self):
+        return max(self.max_attendance - self.students.count(), 0)
