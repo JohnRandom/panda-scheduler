@@ -59,9 +59,13 @@
                   {% trans "Navigation" %} <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">
+                  <li><a href="{% url 'lessons_index' %}">
                     <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                     {% trans "Lessons" %}
+                  </a></li>
+                  <li><a href="{% url 'teachers_index' %}">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                    {% trans "Teachers" %}
                   </a></li>
                 </ul>
               </li>
