@@ -10,11 +10,10 @@
   </div>
   <div id="teacher-{{ teacher.id }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{ teacher.id }}">
     <div class="panel-body">
-      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#new-lesson-{{ teacher.id }}">
-        {% trans 'Create New Lesson' %}
-      </button>
-      <h3>{% trans 'Lessons Available' %}</h3>
-      <ul>
+      <h5>
+        {% trans 'Lessons Available' %}
+      </h5>
+      <ul class="lesson-listing">
       {% for lesson in teacher.lessons.all %}
         <li>
           {% if lesson.cancelled %}<b>CANCELLED</b>{% endif %}
@@ -26,6 +25,10 @@
         </li>
       {% endfor %}
       </ul>
+      <span class="btn-new" data-toggle="modal" data-target="#new-lesson-{{ teacher.id }}">
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+        <span>{% trans 'Add Lesson' %}</span>
+      </span>
       {% include "_new_lesson_modal.html" with teacher=teacher form=new_lesson_form %}
     </div>
   </div>

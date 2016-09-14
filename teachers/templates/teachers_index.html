@@ -2,19 +2,37 @@
 {% load i18n %}
 {% load static %}
 
-{% block content %}
-<h2>Create New Teacher</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ new_teacher_form.as_p }}
-  <input type="submit" name="Submit" />
-</form>
+{% block css %}
+  {{ block.super }}
+  <style type="text/css">
+    .lesson-listing {
+      margin-bottom: 35px;
+    }
+    .btn-new:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  </style>
+{% endblock css %}
 
-<h2>{% trans 'Available Teachers' %}</h2>
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  {% for teacher in teachers %}
-  {% include "_teacher_details.html" with teacher=teacher %}
-  {% endfor %}
+{% block content %}
+<h1 class="page-header">{% trans 'Teachers' %}</h1>
+<div class="row">
+  <div class="col-md-9">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      {% for teacher in teachers %}
+      {% include "_teacher_details.html" with teacher=teacher %}
+      {% endfor %}
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">{% trans 'New Teacher' %}</div>
+      <div class="panel-body">
+        {% include '_new_teacher_form.html' with form=new_teacher_form %}
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock content %}
 

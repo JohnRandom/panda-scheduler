@@ -1,0 +1,13 @@
+{% load i18n %}
+
+<form class="form-inline" method="post">
+  {% csrf_token %}
+  <div class="input-group">
+    {{ form.name.errors }}
+    <span class="input-group-addon">
+      {{ form.name.label }}
+    </span>
+    {{ form.name }}
+  </div>
+  <button type="submit" class="btn btn-primary">{% trans 'Submit' %}</button>
+</form>
