@@ -1,0 +1,32 @@
+{% load i18n %}
+
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="heading-{{ teacher.id }}">
+    <h4 class="panel-title">
+      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#teacher-{{ teacher.id }}" aria-expanded="false" aria-controls="teacher-{{ teacher.id }}">
+        {{ teacher.name }}
+      </a>
+    </h4>
+  </div>
+  <div id="teacher-{{ teacher.id }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{ teacher.id }}">
+    <div class="panel-body">
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#new-lesson-{{ teacher.id }}">
+        {% trans 'Create New Lesson' %}
+      </button>
+      <h3>{% trans 'Lessons Available' %}</h3>
+      <ul>
+      {% for lesson in teacher.lessons.all %}
+        <li>
+          {% if lesson.cancelled %}<b>CANCELLED</b>{% endif %}
+          {{ lesson.subject }}
+          - {{ lesson.get_weekday_display }}
+            {% trans 'from' %}:{{ lesson.time_starting }}
+            {% trans 'until' %}: {{ lesson.time_ending }}
+          - {% trans 'attendees' %}: {{ lesson.students.count }}/{{ lesson.max_attendance }}
+        </li>
+      {% endfor %}
+      </ul>
+      {% include "_new_lesson_modal.html" with teacher=teacher form=new_lesson_form %}
+    </div>
+  </div>
+</div>

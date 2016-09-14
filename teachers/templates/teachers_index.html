@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<h2>Create New Teacher</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ new_teacher_form.as_p }}
+  <input type="submit" name="Submit" />
+</form>
+
+<h2>{% trans 'Available Teachers' %}</h2>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  {% for teacher in teachers %}
+  {% include "_teacher_details.html" with teacher=teacher %}
+  {% endfor %}
+</div>
+{% endblock content %}
+
+{% block js %}
+  {{ block.super }}
+  <script type="text/javascript" src="{% static 'js/init-time-fields.js' %}"></script>
+{% endblock js %}
